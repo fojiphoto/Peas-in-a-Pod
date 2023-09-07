@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594f26476f436094c935fcaeed72855e, type: 3}
   m_Name: Pomegranate
   m_EditorClassIdentifier: 
-  m_ItemType: 0
-  m_ItemSprite: {fileID: 21300000, guid: 6d540e29f4ef70d48a0adba598f8c887, type: 3}
+  <ItemType>k__BackingField: 0
+  <ItemSprite>k__BackingField: {fileID: 21300000, guid: 6d540e29f4ef70d48a0adba598f8c887, type: 3}

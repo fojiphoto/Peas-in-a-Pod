@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594f26476f436094c935fcaeed72855e, type: 3}
   m_Name: Lemon
   m_EditorClassIdentifier: 
-  m_ItemType: 16
-  m_ItemSprite: {fileID: 21300000, guid: 9e55de7303131d44fb20906158bea70b, type: 3}
+  <ItemType>k__BackingField: 16
+  <ItemSprite>k__BackingField: {fileID: 21300000, guid: 9e55de7303131d44fb20906158bea70b, type: 3}

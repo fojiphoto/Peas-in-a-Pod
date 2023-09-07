@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594f26476f436094c935fcaeed72855e, type: 3}
   m_Name: Tyre
   m_EditorClassIdentifier: 
-  m_ItemType: 13
-  m_ItemSprite: {fileID: 21300000, guid: 7a581af5eb81d2340a346b99141fbdd8, type: 3}
+  <ItemType>k__BackingField: 13
+  <ItemSprite>k__BackingField: {fileID: 21300000, guid: 7a581af5eb81d2340a346b99141fbdd8, type: 3}

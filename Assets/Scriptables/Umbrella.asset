@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594f26476f436094c935fcaeed72855e, type: 3}
   m_Name: Umbrella
   m_EditorClassIdentifier: 
-  m_ItemType: 3
-  m_ItemSprite: {fileID: 21300000, guid: 160b7e8f49d0d9244b405f24d9610666, type: 3}
+  <ItemType>k__BackingField: 3
+  <ItemSprite>k__BackingField: {fileID: 21300000, guid: 160b7e8f49d0d9244b405f24d9610666, type: 3}

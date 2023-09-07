@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594f26476f436094c935fcaeed72855e, type: 3}
   m_Name: Pear
   m_EditorClassIdentifier: 
-  m_ItemType: 1
-  m_ItemSprite: {fileID: 21300000, guid: 50021d2fe0a90144dac5d9dc5e66352a, type: 3}
+  <ItemType>k__BackingField: 1
+  <ItemSprite>k__BackingField: {fileID: 21300000, guid: 50021d2fe0a90144dac5d9dc5e66352a, type: 3}

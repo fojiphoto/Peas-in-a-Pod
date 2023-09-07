@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594f26476f436094c935fcaeed72855e, type: 3}
   m_Name: Orange
   m_EditorClassIdentifier: 
-  m_ItemType: 14
-  m_ItemSprite: {fileID: 21300000, guid: 1c220098c68874049b34c2fd1e57f1ec, type: 3}
+  <ItemType>k__BackingField: 14
+  <ItemSprite>k__BackingField: {fileID: 21300000, guid: 1c220098c68874049b34c2fd1e57f1ec, type: 3}

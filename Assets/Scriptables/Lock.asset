@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 594f26476f436094c935fcaeed72855e, type: 3}
   m_Name: Lock
   m_EditorClassIdentifier: 
-  m_ItemType: 7
-  m_ItemSprite: {fileID: 21300000, guid: 6d653ffb5b395984aa06c869cbe7ebd7, type: 3}
+  <ItemType>k__BackingField: 7
+  <ItemSprite>k__BackingField: {fileID: 21300000, guid: 6d653ffb5b395984aa06c869cbe7ebd7, type: 3}

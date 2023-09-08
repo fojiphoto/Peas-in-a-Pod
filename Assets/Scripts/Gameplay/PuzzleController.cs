@@ -77,7 +77,7 @@ public class PuzzleController : MonoBehaviour
 
    private void OnGameWin()
    {
-      
+      Debug.LogError("Game Complete");
    }
 
    private void Reset()

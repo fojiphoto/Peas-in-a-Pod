@@ -11,6 +11,8 @@ public class CardsHandler : MonoBehaviour
     [SerializeField] private Transform m_CardsContainer;
     [SerializeField] private GameObject m_CardPrefab;
 
+    [SerializeField] private GridLayoutGroup m_GridComponent;
+    
     private List<Item> m_Spawnables = new();
     private List<Card> m_Card = new();
 
@@ -52,6 +54,13 @@ public class CardsHandler : MonoBehaviour
             
             m_Card.Add(card);
         }
+
+        Invoke(nameof(DisableGridComponent), 0.5f);
+    }
+
+    private void DisableGridComponent()
+    {
+        m_GridComponent.enabled = false;
     }
 
     void OnCardRemoveRequested(CardRequestObject cardRequestA, CardRequestObject cardRequestB)

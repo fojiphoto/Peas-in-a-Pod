@@ -742,6 +742,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_CardsContainer: {fileID: 1255948716}
   m_CardPrefab: {fileID: 6701650427235851136, guid: c6d45d7a09cc22246859bb89fe9b16ef, type: 3}
+  m_GridComponent: {fileID: 1255948717}
 --- !u!225 &1255948721
 CanvasGroup:
   m_ObjectHideFlags: 0

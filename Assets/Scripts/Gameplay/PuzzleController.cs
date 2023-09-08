@@ -6,11 +6,19 @@ using UnityEngine;
 public class PuzzleController : MonoBehaviour
 {
    [SerializeField] private List<Item> m_PuzzlePieces;
+   [SerializeField] private float m_WaitAfterInputs = 0.5f;
    
    private CardRequestObject m_CurrentPuzzleItem;
 
+   private WaitForSeconds m_InputDelay; 
    private int TapCount = 0;
-
+   
+   private void Start()
+   {
+      GameEvents.GameplayEvents.CardsSpawnRequest.Raise(m_PuzzlePieces.ToArray());
+      m_InputDelay = new WaitForSeconds(m_WaitAfterInputs);
+   }
+   
    private void OnEnable()
    {
       GameEvents.GameplayEvents.CardTap.Register(OnCardTap);
@@ -20,12 +28,7 @@ public class PuzzleController : MonoBehaviour
    {
       GameEvents.GameplayEvents.CardTap.UnRegister(OnCardTap);
    }
-
-   private void Start()
-   {
-      GameEvents.GameplayEvents.CardsSpawnRequest.Raise(m_PuzzlePieces.ToArray());
-   }
-
+   
    private void OnCardTap(CardRequestObject item)
    {
       if (m_CurrentPuzzleItem == null)
@@ -34,14 +37,22 @@ public class PuzzleController : MonoBehaviour
       }
       else
       {
-         if (m_CurrentPuzzleItem.ItemName == item.ItemName)
-         {
-            OnRightGuess(item,m_CurrentPuzzleItem);
-         }
-         else
-         {
-            OnWrongGuess();
-         }
+         GameEvents.GameplayEvents.InputStatusChanged.Raise(false);
+         StartCoroutine(CompareCards(item));
+      }
+   }
+
+   private IEnumerator CompareCards(CardRequestObject requestObject)
+   {
+      yield return m_InputDelay;
+      
+      if (m_CurrentPuzzleItem.ItemName == requestObject.ItemName)
+      {
+         OnRightGuess(requestObject,m_CurrentPuzzleItem);
+      }
+      else
+      {
+         OnWrongGuess();
       }
    }
 
@@ -73,5 +84,6 @@ public class PuzzleController : MonoBehaviour
    {
       m_CurrentPuzzleItem = null;
       GameEvents.GameplayEvents.ResetGame.Raise();
+      GameEvents.GameplayEvents.InputStatusChanged.Raise(true);
    }
 }

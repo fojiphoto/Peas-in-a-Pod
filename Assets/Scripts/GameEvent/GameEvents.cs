@@ -8,5 +8,6 @@ public static class GameEvents
         public static GameEvent<Item[]> CardsSpawnRequest = new();
         public static GameEvent<CardRequestObject, CardRequestObject> CardRemoveRequested = new();
         public static GameEvent ResetGame = new();
+        public static GameEvent<bool> InputStatusChanged = new();
     }
 }

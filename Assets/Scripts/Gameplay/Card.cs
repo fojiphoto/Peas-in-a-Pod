@@ -33,20 +33,11 @@ public class Card : MonoBehaviour
     private void OnTap()
     {
         Reveal();
-        StartCoroutine(OnTapDelay());
-
-    }
-
-    IEnumerator OnTapDelay()
-    {
-        yield return new WaitForSeconds(0.5f);
-        //Raise Event
         GameEvents.GameplayEvents.CardTap.Raise(new CardRequestObject()
         {
             ID = ID,
             ItemName = m_CardType
         });
-        
     }
 
     public void Reveal()

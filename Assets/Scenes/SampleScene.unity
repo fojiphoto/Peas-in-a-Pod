@@ -412,7 +412,7 @@ MonoBehaviour:
   m_ScaleFactor: 1
   m_ReferenceResolution: {x: 1920, y: 1080}
   m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
+  m_MatchWidthOrHeight: 0.5
   m_PhysicalUnit: 3
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
@@ -646,10 +646,10 @@ RectTransform:
   m_Father: {fileID: 523050623}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 183.7373, y: 6.148926}
-  m_SizeDelta: {x: -468.8467, y: -114.4172}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: 162, y: 0}
+  m_SizeDelta: {x: 1451.1533, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1255948717
 MonoBehaviour:
@@ -671,8 +671,8 @@ MonoBehaviour:
   m_ChildAlignment: 4
   m_StartCorner: 0
   m_StartAxis: 1
-  m_CellSize: {x: 150, y: 150}
-  m_Spacing: {x: 100, y: 100}
+  m_CellSize: {x: 230, y: 230}
+  m_Spacing: {x: 100, y: 30}
   m_Constraint: 2
   m_ConstraintCount: 4
 --- !u!114 &1255948718
@@ -726,6 +726,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_CardsContainer: {fileID: 1255948716}
-  m_GridLayoutComponent: {fileID: 1255948717}
   m_CardPrefab: {fileID: 6701650427235851136, guid: c6d45d7a09cc22246859bb89fe9b16ef, type: 3}
   m_ItemsToSpawn: 0000000001000000130000000200000003000000040000000600000007000000

@@ -1,4 +1,4 @@
-public enum Items
+public enum Item
 {
     Pomegranate,
     Pear,
@@ -20,4 +20,4 @@ public enum Items
     Shoes,
     Book,
     Truck
-};
+}

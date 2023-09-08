@@ -13,7 +13,6 @@ public class CardsHandler : MonoBehaviour
 
     [SerializeField] private GridLayoutGroup m_GridComponent;
     
-    private List<Item> m_Spawnables = new();
     private List<Card> m_Card = new();
 
     private void OnEnable()
@@ -30,27 +29,23 @@ public class CardsHandler : MonoBehaviour
         GameEvents.GameplayEvents.ResetGame.UnRegister(OnResetGame);
     }
     
-    void GenerateCards(Item[] cards)
+    void GenerateCards(List<Item> cards,int rows)
     {
-        for (int i = 0; i < 2; i++)
-        {
-            m_Spawnables.AddRange(cards);
-        }
-
-        SpawnAndInitializeCardsInternal();
+        m_GridComponent.constraintCount = rows;
+        SpawnAndInitializeCardsInternal(cards);
     }
 
-    private void SpawnAndInitializeCardsInternal()
+    private void SpawnAndInitializeCardsInternal(List<Item> cards)
     {
-        while (m_Spawnables.Count > 0)
+        while (cards.Count > 0)
         {
             GameObject cardGO = Instantiate(m_CardPrefab, m_CardsContainer);
             Card card = cardGO.GetComponent<Card>();
 
-            int index = Random.Range(0, m_Spawnables.Count);
+            int index = Random.Range(0, cards.Count);
             
-            card.Initialize(m_Spawnables[index]);
-            m_Spawnables.RemoveAt(index);
+            card.Initialize(cards[index]);
+            cards.RemoveAt(index);
             
             m_Card.Add(card);
         }

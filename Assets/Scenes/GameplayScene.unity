@@ -979,7 +979,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27429e30f7d6592489fcdcbdaa514363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PuzzlePieces: 0000000001000000020000000300000004000000050000000600000007000000
+  m_PuzzleToSolve: {fileID: 11400000, guid: d7c62fd923cc34e4f906cf146dd67435, type: 2}
   m_WaitAfterInputs: 0.25
   m_WaitBeforeGameStart: 1.5
 --- !u!4 &2046324980

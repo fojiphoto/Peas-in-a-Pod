@@ -19,5 +19,6 @@ public enum Item
     Lemon,
     Shoes,
     Book,
-    Truck
+    Truck,
+    None
 }

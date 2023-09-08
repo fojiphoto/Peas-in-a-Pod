@@ -180,7 +180,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 1}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -211,8 +211,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea49722302a56da4a964af65ff253ef0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_CardType: 0
   m_CurrentCard: {fileID: 7930272589371288881}
   m_ItemImage: {fileID: 1504499294681304585}
-  m_IsFaceUp: 0
-  m_IsMatched: 0

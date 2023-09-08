@@ -2,27 +2,26 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class PuzzleController : MonoBehaviour
 {
-   [SerializeField] private List<Item> m_PuzzlePieces;
+   [SerializeField] private PuzzleObject m_PuzzleToSolve;
    
    [SerializeField] private float m_WaitAfterInputs = 0.5f;
    [SerializeField] private float m_WaitBeforeGameStart = 0.5f;
    
    private CardRequestObject m_CurrentPuzzleItem;
+   private List<Item> m_PuzzlePieces = new();
 
    private WaitForSeconds m_InputDelay; 
    private int TapCount = 0;
    
    private void Start()
    {
-      GameEvents.GameplayEvents.CardsSpawnRequest.Raise(m_PuzzlePieces.ToArray());
-      
-      m_InputDelay = new WaitForSeconds(m_WaitAfterInputs);
-      Invoke(nameof(StartGame), m_WaitBeforeGameStart);
+      ConstructPuzzle();
    }
-
+   
    private void OnEnable()
    {
       GameEvents.GameplayEvents.CardTap.Register(OnCardTap);
@@ -33,6 +32,23 @@ public class PuzzleController : MonoBehaviour
    {
       GameEvents.GameplayEvents.CardTap.UnRegister(OnCardTap);
       GameEvents.TimerEvents.TimerComplete.UnRegister(OnTimerComplete);
+   }
+
+   void ConstructPuzzle()
+   {
+      int totalGridCells = m_PuzzleToSolve.TotalCells;
+      Item[] enumValues = (Item[])Enum.GetValues(typeof(Item));
+
+      for (int i = 0; i < totalGridCells / 2; i++)
+      {
+         m_PuzzlePieces.Add(enumValues[Random.Range(0, enumValues.Length)]);
+      }
+
+      m_PuzzlePieces.AddRange(m_PuzzlePieces);
+
+      GameEvents.GameplayEvents.CardsSpawnRequest.Raise(m_PuzzlePieces, m_PuzzleToSolve.PuzzleConfig.Rows);
+      m_InputDelay = new WaitForSeconds(m_WaitAfterInputs);
+      Invoke(nameof(StartGame), m_WaitBeforeGameStart);
    }
 
    private void OnTimerComplete()

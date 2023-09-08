@@ -786,6 +786,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PuzzlePieces: 0000000001000000020000000300000004000000050000000600000007000000
   m_WaitAfterInputs: 0.25
+  m_WaitBeforeGameStart: 1.5
 --- !u!4 &2046324980
 Transform:
   m_ObjectHideFlags: 0

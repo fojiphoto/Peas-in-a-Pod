@@ -26,8 +26,6 @@ public class Card : MonoBehaviour
         m_CardType = itemData.ItemType;
         m_ItemImage.sprite = itemData.ItemSprite;
         ID = Guid.NewGuid();
-        
-        Hide();
     }
 
     private void OnTap()

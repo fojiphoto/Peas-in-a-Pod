@@ -6,7 +6,9 @@ using UnityEngine;
 public class PuzzleController : MonoBehaviour
 {
    [SerializeField] private List<Item> m_PuzzlePieces;
+   
    [SerializeField] private float m_WaitAfterInputs = 0.5f;
+   [SerializeField] private float m_WaitBeforeGameStart = 0.5f;
    
    private CardRequestObject m_CurrentPuzzleItem;
 
@@ -16,7 +18,17 @@ public class PuzzleController : MonoBehaviour
    private void Start()
    {
       GameEvents.GameplayEvents.CardsSpawnRequest.Raise(m_PuzzlePieces.ToArray());
+      GameEvents.GameplayEvents.InputStatusChanged.Raise(false);
+      
       m_InputDelay = new WaitForSeconds(m_WaitAfterInputs);
+
+      Invoke(nameof(StartGame), m_WaitBeforeGameStart);
+   }
+
+   void StartGame()
+   {
+      GameEvents.GameplayEvents.ResetGame.Raise();
+      GameEvents.GameplayEvents.InputStatusChanged.Raise(true);
    }
    
    private void OnEnable()

@@ -12,7 +12,7 @@ public class GameEvent
         Event += method;
     }
 
-    public void Unregister(Action method)
+    public void UnRegister(Action method)
     {
         Event -= method;
     }
@@ -53,23 +53,6 @@ public class GameEvent<T1,T2>
     public void Raise(T1 param, T2 paramB)
     {
         Event?.Invoke(param,paramB);
-    }
-}
-
-public class GameEvent<T1,T2,T3>
-{
-    private event Action<T1,T2,T3> Event;
-    public void Register(Action<T1,T2,T3> method)
-    {
-        Event += method;
-    }
-    public void UnRegister(Action<T1,T2,T3> method)
-    {
-        Event -= method;
-    }
-    public void Raise(T1 param, T2 paramB,T3 paramC)
-    {
-        Event?.Invoke(param,paramB,paramC);
     }
 }
 

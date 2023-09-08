@@ -27,7 +27,7 @@ public class CardsHandler : MonoBehaviour
     {
         GameEvents.GameplayEvents.CardsSpawnRequest.UnRegister(GenerateCards);
         GameEvents.GameplayEvents.CardRemoveRequested.UnRegister(OnCardRemoveRequested);
-        GameEvents.GameplayEvents.ResetGame.Unregister(OnResetGame);
+        GameEvents.GameplayEvents.ResetGame.UnRegister(OnResetGame);
     }
     
     void GenerateCards(Item[] cards)

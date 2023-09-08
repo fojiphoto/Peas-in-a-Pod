@@ -18,27 +18,33 @@ public class PuzzleController : MonoBehaviour
    private void Start()
    {
       GameEvents.GameplayEvents.CardsSpawnRequest.Raise(m_PuzzlePieces.ToArray());
-      GameEvents.GameplayEvents.InputStatusChanged.Raise(false);
       
       m_InputDelay = new WaitForSeconds(m_WaitAfterInputs);
-
       Invoke(nameof(StartGame), m_WaitBeforeGameStart);
    }
 
-   void StartGame()
-   {
-      GameEvents.GameplayEvents.ResetGame.Raise();
-      GameEvents.GameplayEvents.InputStatusChanged.Raise(true);
-   }
-   
    private void OnEnable()
    {
       GameEvents.GameplayEvents.CardTap.Register(OnCardTap);
+      GameEvents.TimerEvents.TimerComplete.Register(OnTimerComplete);
    }
 
    private void OnDisable()
    {
       GameEvents.GameplayEvents.CardTap.UnRegister(OnCardTap);
+      GameEvents.TimerEvents.TimerComplete.UnRegister(OnTimerComplete);
+   }
+
+   private void OnTimerComplete()
+   {
+      OnGameComplete(false);
+   }
+   
+   void StartGame()
+   {
+      GameEvents.GameplayEvents.StartGame.Raise();
+      GameEvents.GameplayEvents.ResetGame.Raise();
+      SetGameInputEnabled(true);
    }
    
    private void OnCardTap(CardRequestObject item)
@@ -49,7 +55,7 @@ public class PuzzleController : MonoBehaviour
       }
       else
       {
-         GameEvents.GameplayEvents.InputStatusChanged.Raise(false);
+         SetGameInputEnabled(false);
          StartCoroutine(CompareCards(item));
       }
    }
@@ -76,7 +82,7 @@ public class PuzzleController : MonoBehaviour
 
       if (m_PuzzlePieces.Count <= 0)
       {
-         OnGameWin();
+         OnGameComplete(true);
       }
 
       Reset();
@@ -87,15 +93,21 @@ public class PuzzleController : MonoBehaviour
       Reset();
    }
 
-   private void OnGameWin()
+   private void OnGameComplete(bool status)
    {
-      Debug.LogError("Game Complete");
+      SetGameInputEnabled(false);
+      GameEvents.GameplayEvents.GameComplete.Raise(true);
    }
 
+   private void SetGameInputEnabled(bool status)
+   {
+      GameEvents.GameplayEvents.InputStatusChanged.Raise(status);
+   }
+   
    private void Reset()
    {
       m_CurrentPuzzleItem = null;
       GameEvents.GameplayEvents.ResetGame.Raise();
-      GameEvents.GameplayEvents.InputStatusChanged.Raise(true);
+      SetGameInputEnabled(true);
    }
 }

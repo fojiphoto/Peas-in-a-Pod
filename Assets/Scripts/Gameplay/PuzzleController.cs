@@ -49,7 +49,7 @@ public class PuzzleController : MonoBehaviour
       GameEvents.GameplayEvents.CardsSpawnRequest.Raise(m_PuzzlePieces, m_PuzzleToSolve.PuzzleConfig.Rows);
       m_InputDelay = new WaitForSeconds(m_WaitAfterInputs);
       Invoke(nameof(StartGame), m_WaitBeforeGameStart);
-   }
+    }
 
    private void OnTimerComplete()
    {

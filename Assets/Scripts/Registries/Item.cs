@@ -19,5 +19,8 @@ public enum Item
     Lemon,
     Shoes,
     Book,
-    Truck
+    Truck,
+    Crow,
+    Frog,
+    Monkey
 }

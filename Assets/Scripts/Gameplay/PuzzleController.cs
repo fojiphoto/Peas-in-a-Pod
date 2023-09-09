@@ -19,7 +19,8 @@ public class PuzzleController : MonoBehaviour
    
    private void Start()
    {
-      ConstructPuzzle();
+        ConstructPuzzle();
+        MenuScript.Instance.m_PlayBtn.onClick.AddListener(GameBegun);
    }
    
    private void OnEnable()
@@ -49,7 +50,12 @@ public class PuzzleController : MonoBehaviour
       GameEvents.GameplayEvents.CardsSpawnRequest.Raise(m_PuzzlePieces, m_PuzzleToSolve.PuzzleConfig.Rows);
       m_InputDelay = new WaitForSeconds(m_WaitAfterInputs);
       Invoke(nameof(StartGame), m_WaitBeforeGameStart);
-   }
+    }
+
+   void GameBegun()
+   {
+        MenuScript.Instance.m_MenuPanel.SetActive(false);
+    }
 
    private void OnTimerComplete()
    {

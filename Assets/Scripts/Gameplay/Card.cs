@@ -23,6 +23,9 @@ public class Card : MonoBehaviour
     public void Initialize(Item item)
     {
         ItemData itemData = ItemDataHandler.Instance.GetItemData(item);
+        
+        Debug.Log($"Find {item}");
+        
         m_CardType = itemData.ItemType;
         m_ItemImage.sprite = itemData.ItemSprite;
         ID = Guid.NewGuid();

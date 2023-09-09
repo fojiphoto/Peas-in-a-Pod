@@ -19,7 +19,7 @@ public class PuzzleController : MonoBehaviour
    
    private void Start()
    {
-        ConstructPuzzle();
+      ConstructPuzzle();
    }
    
    private void OnEnable()

@@ -10,6 +10,8 @@ public class AudioManager : MonobehaviourSingleton<AudioManager>
     [SerializeField] public AudioClip Tap;
     [SerializeField] public AudioClip Match;
     [SerializeField] public AudioClip MissMatch;
+    [SerializeField] public AudioClip Pass;
+    [SerializeField] public AudioClip Fail;
 
     private void Start()
     {

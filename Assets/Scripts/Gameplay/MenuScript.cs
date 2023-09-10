@@ -13,7 +13,6 @@ public class MenuScript : MonoBehaviour
     }
     void SwitchScene()
     {
-        m_MenuPanel.SetActive(false);
         SceneManager.LoadScene("GameplayScene");
     }
 }

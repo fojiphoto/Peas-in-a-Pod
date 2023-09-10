@@ -104,6 +104,20 @@ public class CardsHandler : MonoBehaviour
     {
         GameEvents.GameplayEvents.GameComplete.Raise(false);
         m_LevelFailPanel.SetActive(true);
+        FailSoundEffect();
+    }
+
+    private void FailSoundEffect() 
+    {
+        AudioManager.Instance.SetSoundEffectsVolume(1);
+        AudioManager.Instance.SetMusicVolume(0.25f);
+        AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.Fail);
+    }  
+    private void PassSoundEffect() 
+    {
+        AudioManager.Instance.SetSoundEffectsVolume(1);
+        AudioManager.Instance.SetMusicVolume(0.25f);
+        AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.Pass);
     }
 
     void CheckGameComplete()
@@ -113,6 +127,7 @@ public class CardsHandler : MonoBehaviour
             GameEvents.GameplayEvents.GameComplete.Raise(true);
             m_LevelCompletePanel.SetActive(true);
             UpdateScore();
+            PassSoundEffect();
         }
     }
 
@@ -159,17 +174,17 @@ public class CardsHandler : MonoBehaviour
         objectToScale.localScale = target;
     }
 
-
     void NextLevel() 
     {
-        PlayerPrefsManager.Set(PlayerPrefsManager.CurrentLevel, PlayerPrefsManager.Get(PlayerPrefsManager.CurrentLevel,0) + 1);
-        
+        PlayerPrefsManager.Set(PlayerPrefsManager.CurrentLevel, PlayerPrefsManager.Get(PlayerPrefsManager.CurrentLevel,0) + 1);    
         SceneManager.LoadScene("GameplayScene");
+        AudioManager.Instance.SetMusicVolume(0.75f);
     }
 
     void RestartLevel() 
     {
         SceneManager.LoadScene("GameplayScene");
+        AudioManager.Instance.SetMusicVolume(0.75f);
     }
 
     public Card GetItemData(Guid ID) => m_Card.Find(x => x.ID == ID);

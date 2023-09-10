@@ -2,7 +2,7 @@ using UnityEngine.UI;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class MenuScript : MonobehaviourSingleton<MenuScript>
+public class MenuScript : MonoBehaviour
 {
     [field: SerializeField] public GameObject m_MenuPanel;
     [field: SerializeField] public GameObject m_CompletePanel;
@@ -34,14 +34,12 @@ public class MenuScript : MonobehaviourSingleton<MenuScript>
     {
         Reset();
         GameEvents.GameplayEvents.ResetGame.Raise();
-        PuzzleController.Instance.ConstructPuzzle();
         SceneManager.LoadScene("GameplayScene");
     }
     public void RestartLevel()
     {
         Reset();
         GameEvents.GameplayEvents.ResetGame.Raise();
-        PuzzleController.Instance.ConstructPuzzle();
         SceneManager.LoadScene("GameplayScene");
     }
 }

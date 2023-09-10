@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PuzzleController : MonobehaviourSingleton<PuzzleController>
+public class PuzzleController : MonoBehaviour
 {
    [SerializeField] private PuzzleObject m_PuzzleToSolve;
    
@@ -19,26 +19,26 @@ public class PuzzleController : MonobehaviourSingleton<PuzzleController>
    
    private void Start()
    {
-      ConstructPuzzle();
+
+
+      ConstructPuzzle(m_PuzzleToSolve);
         
    }
    
    private void OnEnable()
    {
       GameEvents.GameplayEvents.CardTap.Register(OnCardTap);
-      GameEvents.TimerEvents.TimerComplete.Register(OnTimerComplete);
    }
 
    private void OnDisable()
    {
       GameEvents.GameplayEvents.CardTap.UnRegister(OnCardTap);
-      GameEvents.TimerEvents.TimerComplete.UnRegister(OnTimerComplete);
    }
 
-   public void ConstructPuzzle()
+   public void ConstructPuzzle(PuzzleObject Obj)
    {
         Debug.LogError("Constructing Puzzle");
-      int totalGridCells = m_PuzzleToSolve.TotalCells;
+      int totalGridCells = Obj.TotalCells;
         Debug.Log("Total Grid Cells "+totalGridCells);
       Item[] enumValues = (Item[])Enum.GetValues(typeof(Item));
 
@@ -50,16 +50,12 @@ public class PuzzleController : MonobehaviourSingleton<PuzzleController>
 
       m_PuzzlePieces.AddRange(m_PuzzlePieces);
 
-      GameEvents.GameplayEvents.CardsSpawnRequest.Raise(m_PuzzlePieces, m_PuzzleToSolve.PuzzleConfig.Rows);
+      GameEvents.GameplayEvents.CardsSpawnRequest.Raise(m_PuzzlePieces, Obj.PuzzleConfig.Rows);
       m_InputDelay = new WaitForSeconds(m_WaitAfterInputs);
       Invoke(nameof(StartGame), m_WaitBeforeGameStart);
     }
 
-   private void OnTimerComplete()
-   {
-      OnGameComplete(false);
-   }
-   
+ 
    void StartGame()
    {
       GameEvents.GameplayEvents.StartGame.Raise();
@@ -109,10 +105,6 @@ public class PuzzleController : MonobehaviourSingleton<PuzzleController>
    {
       SetGameInputEnabled(false);
       GameEvents.GameplayEvents.GameComplete.Raise(status);
-        if (status)
-            MenuScript.Instance.m_CompletePanel.SetActive(true);
-        else
-            MenuScript.Instance.m_FailPanel.SetActive(true);
 
         Debug.Log(" Complete  "+status);
        

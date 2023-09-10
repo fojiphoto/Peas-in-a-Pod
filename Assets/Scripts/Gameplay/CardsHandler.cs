@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -9,6 +10,11 @@ public class CardsHandler : MonoBehaviour
     [SerializeField] private Transform m_CardsContainer;
     [SerializeField] private GameObject m_CardPrefab;
 
+    [SerializeField] private GameObject m_LevelCompletePanel;
+    [SerializeField] private GameObject m_LevelFailPanel;
+
+    [SerializeField] private Button m_NextButton;
+    [SerializeField] private Button m_RestartButton;
     [SerializeField] private GridLayoutGroup m_GridComponent;
     
     private List<Card> m_Card = new();
@@ -18,6 +24,7 @@ public class CardsHandler : MonoBehaviour
         GameEvents.GameplayEvents.CardsSpawnRequest.Register(GenerateCards);
         GameEvents.GameplayEvents.CardRemoveRequested.Register(OnCardRemoveRequested);
         GameEvents.GameplayEvents.ResetGame.Register(OnResetGame);
+        GameEvents.TimerEvents.TimerComplete.Register(OnTimerComplete);
     }
 
     private void OnDisable()
@@ -25,7 +32,15 @@ public class CardsHandler : MonoBehaviour
         GameEvents.GameplayEvents.CardsSpawnRequest.UnRegister(GenerateCards);
         GameEvents.GameplayEvents.CardRemoveRequested.UnRegister(OnCardRemoveRequested);
         GameEvents.GameplayEvents.ResetGame.UnRegister(OnResetGame);
+        GameEvents.TimerEvents.TimerComplete.UnRegister(OnTimerComplete);
+
     }
+    private void Start()
+    {
+        m_NextButton.onClick.AddListener(NextLevel);
+        m_RestartButton.onClick.AddListener(RestartLevel);
+    }
+
 
     void GenerateCards(List<Item> cards,int rows)
     {
@@ -78,11 +93,30 @@ public class CardsHandler : MonoBehaviour
             m_Card[i].Hide();
         }
     }
+    private void OnTimerComplete()
+    {
+        GameEvents.GameplayEvents.GameComplete.Raise(false);
+        m_LevelFailPanel.SetActive(true);
+    }
+
     void CheckGameComplete()
     {
-        if (m_Card.Count<=0)
-            PuzzleController.Instance.OnGameComplete(true);
+        if (m_Card.Count <= 0)
+        {
+            GameEvents.GameplayEvents.GameComplete.Raise(true);
+            m_LevelCompletePanel.SetActive(true);
+        }
     }
-    
+
+    void NextLevel() 
+    {
+        SceneManager.LoadScene("GameplayScene");
+    }
+
+    void RestartLevel() 
+    {
+        SceneManager.LoadScene("GameplayScene");
+    }
+
     public Card GetItemData(Guid ID) => m_Card.Find(x => x.ID == ID);
 }

@@ -1,8 +1,6 @@
 using System;
 using System.Collections.Generic;
-using System.Collections;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 using Random = UnityEngine.Random;
 
@@ -28,7 +26,7 @@ public class CardsHandler : MonoBehaviour
         GameEvents.GameplayEvents.CardRemoveRequested.UnRegister(OnCardRemoveRequested);
         GameEvents.GameplayEvents.ResetGame.UnRegister(OnResetGame);
     }
-    
+
     void GenerateCards(List<Item> cards,int rows)
     {
         m_GridComponent.constraintCount = rows;
@@ -69,6 +67,8 @@ public class CardsHandler : MonoBehaviour
         
         m_Card.Remove(card);
         card.Destroy();
+
+        CheckGameComplete();
     }
 
     void OnResetGame()
@@ -77,6 +77,11 @@ public class CardsHandler : MonoBehaviour
         {
             m_Card[i].Hide();
         }
+    }
+    void CheckGameComplete()
+    {
+        if (m_Card.Count<=0)
+            PuzzleController.Instance.OnGameComplete(true);
     }
     
     public Card GetItemData(Guid ID) => m_Card.Find(x => x.ID == ID);

@@ -39,6 +39,8 @@ public class Card : MonoBehaviour
             ID = ID,
             ItemName = m_CardType
         });
+
+        PuzzleController.Instance.TapCount++;
     }
 
     public void Reveal()

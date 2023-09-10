@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class PuzzleController : MonoBehaviour
+public class PuzzleController : MonobehaviourSingleton<PuzzleController>
 {
    [SerializeField] private PuzzleObject m_PuzzleToSolve;
    
@@ -15,11 +15,12 @@ public class PuzzleController : MonoBehaviour
    private List<Item> m_PuzzlePieces = new();
 
    private WaitForSeconds m_InputDelay; 
-   private int TapCount = 0;
+   public int TapCount = 0;
    
    private void Start()
    {
       ConstructPuzzle();
+        
    }
    
    private void OnEnable()
@@ -34,14 +35,17 @@ public class PuzzleController : MonoBehaviour
       GameEvents.TimerEvents.TimerComplete.UnRegister(OnTimerComplete);
    }
 
-   void ConstructPuzzle()
+   public void ConstructPuzzle()
    {
+        Debug.LogError("Constructing Puzzle");
       int totalGridCells = m_PuzzleToSolve.TotalCells;
+        Debug.Log("Total Grid Cells "+totalGridCells);
       Item[] enumValues = (Item[])Enum.GetValues(typeof(Item));
 
       for (int i = 0; i < totalGridCells / 2; i++)
       {
          m_PuzzlePieces.Add(enumValues[Random.Range(0, enumValues.Length)]);
+         Debug.Log("adding Grid Cell to List");
       }
 
       m_PuzzlePieces.AddRange(m_PuzzlePieces);
@@ -91,16 +95,8 @@ public class PuzzleController : MonoBehaviour
    }
 
    private void OnRightGuess(CardRequestObject cardRequestA, CardRequestObject cardRequestB)
-   {
-      m_PuzzlePieces.Remove(cardRequestA.ItemName);
-      
+   { 
       GameEvents.GameplayEvents.CardRemoveRequested.Raise(cardRequestA, cardRequestB);
-
-      if (m_PuzzlePieces.Count <= 0)
-      {
-         OnGameComplete(true);
-      }
-
       Reset();
    }
 
@@ -109,10 +105,17 @@ public class PuzzleController : MonoBehaviour
       Reset();
    }
 
-   private void OnGameComplete(bool status)
+   public void OnGameComplete(bool status)
    {
       SetGameInputEnabled(false);
-      GameEvents.GameplayEvents.GameComplete.Raise(true);
+      GameEvents.GameplayEvents.GameComplete.Raise(status);
+        if (status)
+            MenuScript.Instance.m_CompletePanel.SetActive(true);
+        else
+            MenuScript.Instance.m_FailPanel.SetActive(true);
+
+        Debug.Log(" Complete  "+status);
+       
    }
 
    private void SetGameInputEnabled(bool status)

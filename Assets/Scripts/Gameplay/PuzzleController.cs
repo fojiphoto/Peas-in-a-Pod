@@ -95,11 +95,14 @@ public class PuzzleController : MonoBehaviour
     {
         GameEvents.GameplayEvents.CardRemoveRequested.Raise(cardRequestA, cardRequestB);
         Reset();
+        AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.Match);
     }
 
     private void OnWrongGuess()
     {
         Reset();
+        AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.MissMatch);
+
     }
 
     public void OnGameComplete(bool status)

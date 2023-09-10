@@ -40,6 +40,7 @@ public class Card : MonoBehaviour
             ItemName = m_CardType
         });
 
+        AudioManager.Instance.PlaySoundEffect(AudioManager.Instance.Tap);
     }
 
     public void Reveal()

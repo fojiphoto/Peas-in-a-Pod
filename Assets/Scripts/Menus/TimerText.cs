@@ -10,6 +10,7 @@ public class TimerText : MonoBehaviour
 
     private void OnEnable()
     {
+
         GameEvents.TimerEvents.TimerUpdate.Register(OnTimerUpdate);
     }
 

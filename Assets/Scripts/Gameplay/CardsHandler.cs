@@ -1,5 +1,7 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -16,7 +18,12 @@ public class CardsHandler : MonoBehaviour
     [SerializeField] private Button m_NextButton;
     [SerializeField] private Button m_RestartButton;
     [SerializeField] private GridLayoutGroup m_GridComponent;
-    
+
+    [SerializeField] private TextMeshProUGUI ScoreText;
+
+    private int targetScore;
+    private float animationDuration = 2f;
+
     private List<Card> m_Card = new();
 
     private void OnEnable()
@@ -105,8 +112,53 @@ public class CardsHandler : MonoBehaviour
         {
             GameEvents.GameplayEvents.GameComplete.Raise(true);
             m_LevelCompletePanel.SetActive(true);
+            UpdateScore();
         }
     }
+
+    void UpdateScore() 
+    {
+        int Score = ScoringManager.Instance.GetScore();
+        ScoreText.text = Score.ToString();
+        StartCoroutine(CountScoreUp(Score));
+        StartCoroutine(ScaleUpAnimation(ScoreText.transform,1.1f,1));
+    }
+    private IEnumerator CountScoreUp(int targetScore)
+    {
+        int startScore = 0; // Start counting from 0
+        float timer = 0f;
+
+        while (timer < animationDuration)
+        {
+            timer += Time.deltaTime;
+            float progress = timer / animationDuration;
+            int newScore = Mathf.RoundToInt(Mathf.Lerp(startScore, targetScore, progress));
+            ScoreText.text = newScore.ToString();
+            yield return null;
+        }
+
+        // Ensure the score reaches the target exactly
+        ScoreText.text = targetScore.ToString();
+    }
+
+    private IEnumerator ScaleUpAnimation(Transform objectToScale, float targetScale, float duration)
+    {
+        Vector3 initialScale = objectToScale.localScale;
+        Vector3 target = new Vector3(targetScale, targetScale, targetScale);
+        float timer = 0f;
+
+        while (timer < duration)
+        {
+            timer += Time.deltaTime;
+            float progress = timer / duration;
+            objectToScale.localScale = Vector3.Lerp(initialScale, target, progress);
+            yield return null;
+        }
+
+        // Ensure the object reaches the target scale exactly
+        objectToScale.localScale = target;
+    }
+
 
     void NextLevel() 
     {

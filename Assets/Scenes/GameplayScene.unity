@@ -2355,7 +2355,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27429e30f7d6592489fcdcbdaa514363, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_PuzzleToSolve: {fileID: 11400000, guid: d7c62fd923cc34e4f906cf146dd67435, type: 2}
+  m_PuzzleToSolve:
+  - {fileID: 11400000, guid: 50dec5a248826c44a8dfd7db7f8092a3, type: 2}
+  - {fileID: 11400000, guid: 9966512da1be31d45b128f015f8f083a, type: 2}
+  - {fileID: 11400000, guid: d7c62fd923cc34e4f906cf146dd67435, type: 2}
+  - {fileID: 11400000, guid: 4372caf03736bd146b04f3820a655e4c, type: 2}
+  - {fileID: 11400000, guid: 9659576b8738684409acd3fff1d5eceb, type: 2}
+  - {fileID: 11400000, guid: bab92723e66489e48a0fed216134a365, type: 2}
   m_WaitAfterInputs: 0.25
   m_WaitBeforeGameStart: 3
   TapCount: 0

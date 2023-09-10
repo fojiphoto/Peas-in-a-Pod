@@ -110,6 +110,8 @@ public class CardsHandler : MonoBehaviour
 
     void NextLevel() 
     {
+        PlayerPrefsManager.Set(PlayerPrefsManager.CurrentLevel, PlayerPrefsManager.Get(PlayerPrefsManager.CurrentLevel,0) + 1);
+        
         SceneManager.LoadScene("GameplayScene");
     }
 

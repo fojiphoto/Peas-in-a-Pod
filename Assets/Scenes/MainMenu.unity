@@ -1486,6 +1486,8 @@ MonoBehaviour:
   Tap: {fileID: 8300000, guid: 2da9d4c52ac669149b8fd30dd92ab37c, type: 3}
   Match: {fileID: 8300000, guid: 264e2077d8d580645b585989a50c3c55, type: 3}
   MissMatch: {fileID: 8300000, guid: 5ad0ff743503f324cb89b5cc006c0dbb, type: 3}
+  Pass: {fileID: 8300000, guid: 45600a388a8aadf49b6fb4ade81b0ec6, type: 3}
+  Fail: {fileID: 8300000, guid: 657eb9d42ff58324888a6d899b527db2, type: 3}
 --- !u!4 &897815287
 Transform:
   m_ObjectHideFlags: 0

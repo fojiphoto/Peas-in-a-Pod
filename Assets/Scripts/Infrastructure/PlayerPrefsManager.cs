@@ -3,6 +3,7 @@ using UnityEngine;
 public static class PlayerPrefsManager
 {
     public static readonly string CurrentLevel = "CurrentLevel";
+    public static readonly string HighScore = "HighScore";
     public static void Set<T>(string key, T value)
     {
         if (typeof(T) == typeof(int))
@@ -23,7 +24,7 @@ public static class PlayerPrefsManager
         }
         PlayerPrefs.Save();
 
-        Debug.LogError("Player Pref Value "+key+" "+value);
+        Debug.Log("Player Pref Value "+key+" "+value);
     }
 
     public static T Get<T>(string key, T defaultValue)
@@ -45,6 +46,6 @@ public static class PlayerPrefsManager
             Debug.LogWarning("Unsupported data type for PlayerPrefsManager.Get");
             return defaultValue;
         }
-        Debug.LogError("Player Pref Value " + key + " " + defaultValue);
+        Debug.Log("Player Pref Value " + key + " " + defaultValue);
     }
 }

@@ -37,7 +37,8 @@ public class PuzzleController : MonoBehaviour
     }
     public void ConstructPuzzle(PuzzleObject Obj)
     {
-        Debug.LogError("Constructing Puzzle");
+        SetGameInputEnabled(false);
+        Debug.Log("Constructing Puzzle");
         int totalGridCells = Obj.TotalCells;
         Debug.Log("Total Grid Cells " + totalGridCells);
         Item[] enumValues = (Item[])Enum.GetValues(typeof(Item));
